@@ -1,0 +1,186 @@
+#
+# Be aware that even a small syntax error here can lead to failures in output.
+#
+
+sidebar:
+    about: False # set to False or comment line if you want to remove the "how to use?" in the sidebar
+    education: False # set to False if you want education in main section instead of in sidebar
+
+    # Profile information
+    name: Bruno Adelé
+    tagline: DevOps/SRE Senior
+    avatar: brunoadele.png  #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
+
+    # Sidebar links
+    email: brunoadele@gmail.com
+    phone:
+    timezone: Montpellier, France
+    citizenship:
+    website: blog.jesuislibre.org #do not add http://
+    linkedin: brunoadele
+    xing:
+    github: badele
+    telegram: # add your nickname without '@' sign
+    gitlab:
+    bitbucket:
+    twitter: '@jesuislibre'
+    stack-overflow: 2015612/bruno-adelé # Number/Username, e.g. 123456/alandoe
+    codewars:
+    goodreads: # Number-Username, e.g. 123456-alandoe
+    pdf:
+
+    languages:
+      title: Langues
+      info:
+        - idiom: Français
+          level: Natif
+
+        - idiom: Anglais
+          level: Lu/Ecrit
+
+    interests:
+      title: Hobbies
+      info:
+        - item: Informatique/Domotique
+          link: http://blog.jesuislibre.org
+
+        - item: Image de synthèse
+          link: https://www.flickr.com/photos/b_adele/albums/72157604615789600
+
+        - item: Photo
+          link: https://www.flickr.com/photos/b_adele/albums
+
+        - item: Vélo/Trail/Rando
+          link:
+
+career-profile:
+    title: Profil
+    summary: |
+      Passionné d’informatique depuis mon plus jeune âge, je possède 30 ans
+      d’expérience sous Linux, dont 7 ans sur le cloud (5 ans sur AWS / 2 ans
+      sur GCP). J’ai une forte inclination pour les infrastructures immuables et
+      une volonté de maximiser les performances tout en minimisant les
+      ressources et les coûts. J’aime construire des architectures et aider les
+      développeurs à optimiser leurs applications et leurs déploiements.
+
+experiences:
+    title: Experiences
+    info:
+      - role: Devops/SRE Senior
+        time: Mai 2021 -
+        company: Seqone SeqOne Genomics, Montpellier
+        details: |
+          J'ai garanti la stabilité de la plateforme grâce à une surveillance régulière et en apportant mon expertise technique
+          pour améliorer les performances et la fiabilité des applications. J'ai conçu des architectures cloud en utilisant des technologies
+          immuables pour minimiser les coûts et les ressources. Déploiement des applications sous Kubernettes avec Helm
+
+          Technologies utilisées
+            - AWS
+            - Kubernettes, Helm
+            - Terraform, Ansible
+            - Prometheus, Grafana
+            - Nix
+
+      - role: Devops/SRE Senior
+        time: sept. 2018 - avr. 2021 · 2 ans 8 mois
+        company: Adagio, Montpellier
+        details: |
+          Création et configuration d'infrastructures sur Google Cloud Platform (GCP) via la méthode Infrastructure as a Code.
+          Mise en place d'outils de déploiement continu pour Cloud et Docker via Github Action et Gitlab CI.
+
+          Technologies utilisées
+            - GCP
+            - Terraform, Puppet
+            - Datadog
+
+      - role: DevOps/SRE Senior
+        time: sept. 2018 - avr. 2021 · 2 ans 8 mois
+        company: Hawk, Montpellier
+        details: |
+          Création et configuration sur AWS et GCP, interconnexion des infrastructure de façon sécurisé avec le protocole IPSec.
+          Mise en place de supervision avec les outils tels que Consul, Telegraf, Influxdb et Grafana.
+          La plateforme encaissait 300.000 rq/s
+
+          Technologies utilisées
+            - AWS
+            - Terraform, Salt
+            - IPSec
+            - Consul
+            - telegraf, Influxdb, Grafana
+
+      - role: Architecte IT & Système d'Information
+        time: janv. 2002 - mai 2015 · 13 ans 5 mois
+        company: CompuGroup Medical AG, Montpellier
+        details: |
+          - Elaboration d'architecture, analyse et deploiement d'architecture virtualisé
+          - Gestion du budget
+          - Supervision de l'infrastructure
+
+      - role: Développeur Delphi / C# .Net
+        time: avr. 1998 - janv. 2002 · 3 ans 10 mois
+        comany: Axilog, Montpellier
+        details: |
+          - Développement d'un système de détection et d'agrégation de 40000 signalements de bug
+          - Développement CRM interne pour 20.000 clients et 300.000 Prospects.
+          - Développement de composants graphiques pour logiciel médical.
+
+
+projects:
+    title: Mes Projets
+    assignments:
+      - title: nix-homelab
+        link: https://github.com/badele/nix-homelab
+        tagline: "Infrastructure personnelle imutable avec le système d'exploitation NixOS"
+      - title: archlinux-auto-install
+        link: https://github.com/badele/archlinux-auto-install
+        tagline: "Installation automatique de Archlinux depuis un liveCD"
+      - title: gitcheck
+        link: https://github.com/badele/gitcheck
+        tagline: "A responsive website template designed to help startups promote, market and sell their products."
+      - title: SDRHunter
+        link: https://github.com/badele/SDRHunter
+        tagline: "Analyseur de l'activité sur les fréquences radios"
+
+oss:
+    title: Mes contributions
+    contributions:
+      - title: Home-Assistant
+        link: https://github.com/home-assistant/core
+        tagline: "Logiciel de domotique écrit en Python"
+      - title: k8s-at-home
+        link: https://github.com/k8s-at-home/charts
+        tagline: "Nombreuse recettes Helm pour créer un homelab sous Kubernettes"
+      - title: beautifulhugo
+        link: https://github.com/halogenica/beautifulhugo
+        tagline: "Theme pour le moteur statique Go Hugo"
+
+skills:
+    title: Compétences
+
+    toolset:
+      - name: AWS/Terraform
+        level: 95%
+
+      - name: Python
+        level: 95%
+
+      - name: Kubernettes/Helm
+        level: 90%
+
+      - name: Prometheus
+        level: 90%
+
+      - name: Archlinux/Ubuntu
+        level: 90%
+
+      - name: GCP
+        level: 80%
+
+      - name: Sécurité/Reseau
+        level: 80%
+
+      - name: Nix/NixOS
+        level: 70%
+
+footer: >
+    Designed with <i class="fas fa-heart"></i> by <a href="https://github.com/sharu725/online-cv" target="_blank" rel="nofollow">online-cv</a>
