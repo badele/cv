@@ -155,32 +155,21 @@ oss:
         tagline: "Theme pour le moteur statique Go Hugo"
 
 skills:
-    title: Compétences
-
+    title: Technologies pratiquées
     toolset:
-      - name: AWS/Terraform
-        level: 95%
-
-      - name: Python
-        level: 95%
-
-      - name: Kubernettes/Helm
-        level: 90%
-
-      - name: Prometheus
-        level: 90%
-
-      - name: Archlinux/Ubuntu
-        level: 90%
-
-      - name: GCP
-        level: 80%
-
-      - name: Sécurité/Reseau
-        level: 80%
-
-      - name: Nix/NixOS
-        level: 70%
+      - AWS/GCP
+      - Consul
+      - Go
+      - IPSec/iptables
+      - Kubernettes/Helm
+      - Mikrotik
+      - Prometheus/Grafana
+      - Python
+      - Sécurité/Reseau
+      - SOPS
+      - Telegraf/InfluxDB
+      - Terraform/Ansible
+      - Ubuntu/Centos/Archlinux/NixOS
 
 footer: >
     Designed with <i class="fas fa-heart"></i> by <a href="https://github.com/sharu725/online-cv" target="_blank" rel="nofollow">online-cv</a>
