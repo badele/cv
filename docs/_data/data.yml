@@ -72,11 +72,11 @@ experiences:
         details: |
           J'ai garanti la stabilité de la plateforme grâce à une surveillance régulière et en apportant mon expertise technique
           pour améliorer les performances et la fiabilité des applications. J'ai conçu des architectures cloud en utilisant des technologies
-          immuables pour minimiser les coûts et les ressources. Déploiement des applications sous Kubernettes avec Helm
+          immuables pour minimiser les coûts et les ressources. Déploiement des applications sous Kubernetes avec Helm
 
           Technologies utilisées
             - AWS
-            - Kubernettes, Helm
+            - Kubernetes, Helm
             - Terraform, Ansible
             - Prometheus, Grafana
             - Nix
@@ -161,7 +161,7 @@ skills:
       - Consul
       - Go
       - IPSec/iptables
-      - Kubernettes/Helm
+      - Kubernetes/Helm
       - Mikrotik
       - Prometheus/Grafana
       - Python
