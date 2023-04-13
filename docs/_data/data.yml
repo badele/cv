@@ -67,7 +67,7 @@ experiences:
     title: Experiences
     info:
       - role: Devops/SRE Senior
-        time: Mai 2021 - aujourd'hui - 2 ans
+        time: mai 2021 - aujourd'hui - 2 ans
         company: Seqone SeqOne Genomics, Montpellier
         details: |
           J'ai garanti la stabilité de la plateforme grâce à une surveillance régulière et en apportant mon expertise technique
@@ -82,7 +82,7 @@ experiences:
             - Nix
 
       - role: Devops/SRE Senior
-        time: sept. 2018 - avr. 2021 · 2 ans 8 mois
+        time: sept. 2018 - avril 2021 · 2 ans 8 mois
         company: Adagio, Montpellier
         details: |
           Création et configuration d'infrastructures sur Google Cloud Platform (GCP) via la méthode Infrastructure as a Code.
@@ -94,7 +94,7 @@ experiences:
             - Datadog
 
       - role: DevOps/SRE Senior
-        time: sept. 2015 - avr. 2018 · 3 ans 3 mois
+        time: juin 2015 - aout 2018 · 3 ans 3 mois
         company: Hawk, Montpellier
         details: |
           Création et configuration sur AWS et GCP, interconnexion des infrastructure de façon sécurisé avec le protocole IPSec.
