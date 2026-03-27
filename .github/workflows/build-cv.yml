@@ -1,0 +1,113 @@
+name: build-cv
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install mise
+        uses: jdx/mise-action@v2
+      - name: Install TeX Live
+        run: >-
+          sudo apt-get update && sudo apt-get install -y
+          texlive-latex-extra
+          texlive-fonts-extra
+          texlive-fonts-recommended
+          texlive-pictures
+          texlive-lang-french
+          texlive-lang-english
+      - name: Generate PDFs
+        run: mise run generate-all-pdf
+      - name: Upload PDF artifacts
+        if: ${{ env.ACT != 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf
+          path: |
+            cv-fr.pdf
+            cv-en.pdf
+
+  convert-html:
+    needs: build-pdf
+    if: ${{ env.ACT != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Download PDFs
+        uses: actions/download-artifact@v4
+        with:
+          name: pdf
+          path: .
+      - name: Install pdf2htmlEX
+        run: sudo apt-get update && sudo apt-get install -y pdf2htmlex
+      - name: Convert PDFs to HTML
+        run: |
+          pdf2htmlEX --embed-css 1 --embed-font 1 --embed-image 1 --embed-javascript 1 cv-fr.pdf cv-fr.html
+          pdf2htmlEX --embed-css 1 --embed-font 1 --embed-image 1 --embed-javascript 1 cv-en.pdf cv-en.html
+      - name: Upload HTML artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: html
+          path: |
+            cv-fr.html
+            cv-en.html
+
+  deploy-gh-pages:
+    needs: [build-pdf, convert-html]
+    if: ${{ github.ref == 'refs/heads/main' && env.ACT != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Download PDF artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: pdf
+          path: site
+      - name: Download HTML artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: html
+          path: site
+      - name: Prepare site assets
+        run: |
+          mkdir -p site/latex
+          cp index.html site/index.html
+          cp latex/*.png site/latex/
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
+
+  release:
+    needs: deploy-gh-pages
+    if: ${{ github.ref == 'refs/heads/main' && env.ACT != 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Fetch tags
+        run: git fetch --tags --force
+      - name: Compute release tag
+        id: release_tag
+        run: python scripts/compute-release-tag.py
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          gh release create "${{ steps.release_tag.outputs.tag }}"
+          --title "${{ steps.release_tag.outputs.tag }}"
+          --notes "Release ${{ steps.release_tag.outputs.tag }}"
