@@ -1,0 +1,69 @@
+###############################################################################
+# Tools
+###############################################################################
+[settings]
+lockfile = true
+experimental=false
+
+[tools]
+act = "latest"
+go = "latest"
+just = "latest"
+"go:github.com/badele/godown" = "latest"
+"go:github.com/badele/justise" = "1.2.0"
+
+###############################################################################
+# Envs
+###############################################################################
+[env]
+IMAGE_TAG = "badele/cv:latest"
+OUT_DIR = "dist"
+IMAGE_PLATFORMS = "linux/amd64,linux/arm64"
+BIN_PLATFORMS = "darwin/amd64,darwin/arm64,linux/amd64,linux/arm64"
+BUILDX_NAME = "multiarch"
+
+BUILDX_CACHE_DIR = ".buildx-cache"
+
+_.path = "dist/{{ os() | replace(from='macos', to='darwin') }}_{{ arch() | replace(from='x64', to='amd64') }}"
+
+###############################################################################
+# Task
+###############################################################################
+[tasks.justise]
+description = "Convert mise to just recipe"
+hide = true
+silent = true
+run = "justise"
+
+
+[tasks.generate-pdf]
+description = "Generate PDF from latex [latex]"
+usage = '''
+arg "<path>" help="latex filename" 
+arg "[output]" help="output pdf path"
+'''
+# dir = "{{usage_path}}"
+run = '''
+output_path="${usage_output}"
+if [ -z "$output_path" ]; then
+  pdflatex "${usage_path}/main.tex"
+  exit 0
+fi
+output_dir=$(dirname "$output_path")
+output_name=$(basename "$output_path" .pdf)
+mkdir -p "$output_dir"
+pdflatex -output-directory "$output_dir" -jobname "$output_name" "${usage_path}/main.tex"
+'''
+quiet = true
+
+[tasks.generate-all-pdf]
+description = "Generate all PDF from latex [latex]"
+run = '''
+mise run generate-pdf "latex/fr" "cv-fr.pdf"
+mise run generate-pdf "latex/en" "cv-en.pdf"
+'''
+
+
+[tasks.run-build-cv]
+description = "Run build-cv workflow locally [ci]"
+run = "act -W .github/workflows/build-cv.yml"

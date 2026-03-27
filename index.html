@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bruno Adele | Senior DevOps / SRE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --accent: #128789;
+      --accent-soft: rgba(18, 135, 137, 0.12);
+      --dark: #193c3e;
+      --muted: #4f5f60;
+      --light: #f5f5f5;
+      --line: #dbe8e8;
+      --shadow: rgba(25, 60, 62, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Raleway", "Gill Sans", "Trebuchet MS", sans-serif;
+      color: var(--dark);
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbfb 100%);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -20% 0 auto 0;
+      height: 55vh;
+      background: radial-gradient(circle at top, var(--accent-soft), transparent 62%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 24px 72px;
+      text-align: center;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      animation: fade-up 0.9s ease both;
+    }
+
+    .avatar-wrap {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      padding: 8px;
+      background: #ffffff;
+      box-shadow: 0 18px 40px var(--shadow);
+      border: 1px solid var(--line);
+    }
+
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    h1 {
+      margin: 8px 0 0;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .role {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin: 0;
+      max-width: 640px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    .divider {
+      width: 72px;
+      height: 2px;
+      background: var(--accent);
+      margin: 28px auto 0;
+    }
+
+    .contacts {
+      margin-top: 36px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      animation: fade-up 0.9s ease 0.2s both;
+    }
+
+    .contact {
+      text-decoration: none;
+      color: var(--dark);
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      padding: 10px 8px;
+      min-width: 120px;
+      transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 16px;
+    }
+
+    .contact i {
+      font-size: 1.4rem;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      background: #ffffff;
+      box-shadow: 0 10px 24px var(--shadow);
+    }
+
+    .contact span {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .contact:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .cv-section {
+      margin-top: 48px;
+      animation: fade-up 0.9s ease 0.35s both;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 18px;
+      color: var(--dark);
+    }
+
+    .cv-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 180px));
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .cv-card {
+      color: var(--dark);
+      padding: 18px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: 0 16px 32px var(--shadow);
+      display: grid;
+      gap: 14px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cv-card-top {
+      display: grid;
+      gap: 6px;
+    }
+
+    .cv-card i {
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+
+    .cv-card strong {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .cv-card span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .cv-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cv-link {
+      text-decoration: none;
+      color: var(--dark);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: #ffffff;
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .cv-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .cv-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding-top: 48px;
+      }
+
+      .avatar-wrap {
+        width: 150px;
+        height: 150px;
+      }
+
+      .contacts {
+        gap: 12px;
+      }
+
+      .contact {
+        min-width: 96px;
+      }
+
+      .cv-grid {
+        grid-template-columns: minmax(0, 220px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="avatar-wrap">
+        <img src="latex/bruno_avatar.png" alt="Avatar de Bruno Adele">
+      </div>
+      <h1>Bruno Adele</h1>
+      <p class="role">Senior DevOps / SRE</p>
+      <p class="tagline">
+        28 ans d'experience Linux et cloud. Conception d'infrastructures fiables,
+        optimisation des couts, et accompagnement des equipes vers des deploiements
+        robustes.
+      </p>
+      <div class="divider" aria-hidden="true"></div>
+    </header>
+
+    <section class="contacts" aria-label="Contacts">
+      <a class="contact" href="mailto:brunoadele@gmail.com">
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+        <span>Email</span>
+      </a>
+      <a class="contact" href="tel:+33614620695">
+        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+        <span>Telephone</span>
+      </a>
+      <a class="contact" href="https://github.com/badele" target="_blank" rel="noreferrer">
+        <i class="fa-brands fa-github" aria-hidden="true"></i>
+        <span>GitHub</span>
+      </a>
+      <div class="contact" aria-label="Localisation">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        <span>Montpellier</span>
+      </div>
+    </section>
+
+    <section class="cv-section" aria-label="CV">
+      <div class="section-title">CV</div>
+      <div class="cv-grid">
+        <div class="cv-card">
+          <div class="cv-card-top">
+            <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+            <strong>CV FR</strong>
+            <span>Version francaise</span>
+          </div>
+          <div class="cv-actions">
+            <a class="cv-link" href="cv-fr.pdf">PDF</a>
+            <a class="cv-link" href="cv-fr.html">HTML</a>
+          </div>
+        </div>
+        <div class="cv-card">
+          <div class="cv-card-top">
+            <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+            <strong>CV EN</strong>
+            <span>English version</span>
+          </div>
+          <div class="cv-actions">
+            <a class="cv-link" href="cv-en.pdf">PDF</a>
+            <a class="cv-link" href="cv-en.html">HTML</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
