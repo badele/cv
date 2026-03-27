@@ -30,7 +30,7 @@ jobs:
       - name: Generate PDFs
         run: mise run generate-all-pdf
       - name: Upload PDF artifacts
-        if: ${{ env.ACT != 'true' }}
+        if: ${{ !env.ACT }}
         uses: actions/upload-artifact@v4
         with:
           name: pdf
@@ -40,7 +40,7 @@ jobs:
 
   convert-html:
     needs: build-pdf
-    if: ${{ env.ACT != 'true' }}
+    if: ${{ !github.event.act }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -50,12 +50,16 @@ jobs:
         with:
           name: pdf
           path: .
-      - name: Install pdf2htmlEX
-        run: sudo apt-get update && sudo apt-get install -y pdf2htmlex
       - name: Convert PDFs to HTML
         run: |
-          pdf2htmlEX --embed-css 1 --embed-font 1 --embed-image 1 --embed-javascript 1 cv-fr.pdf cv-fr.html
-          pdf2htmlEX --embed-css 1 --embed-font 1 --embed-image 1 --embed-javascript 1 cv-en.pdf cv-en.html
+          docker run --rm \
+            -v "${{ github.workspace }}:/workspace" \
+            -w /workspace \
+            pdf2htmlex/pdf2htmlex:0.18.8.rc2-master-20200820-alpine-3.12.0-x86_64 --embed-css 1 --embed-font 1 --embed-image 1 --embed-javascript 1 cv-fr.pdf cv-fr.html
+          docker run --rm \
+            -v "${{ github.workspace }}:/workspace" \
+            -w /workspace \
+            pdf2htmlex/pdf2htmlex:0.18.8.rc2-master-20200820-alpine-3.12.0-x86_64 --embed-css 1 --embed-font 1 --embed-image 1 --embed-javascript 1 cv-en.pdf cv-en.html
       - name: Upload HTML artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -66,7 +70,7 @@ jobs:
 
   deploy-gh-pages:
     needs: [build-pdf, convert-html]
-    if: ${{ github.ref == 'refs/heads/main' && env.ACT != 'true' }}
+    if: ${{ github.ref == 'refs/heads/main' && !github.event.act }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -94,7 +98,7 @@ jobs:
 
   release:
     needs: deploy-gh-pages
-    if: ${{ github.ref == 'refs/heads/main' && env.ACT != 'true' }}
+    if: ${{ github.ref == 'refs/heads/main' && !github.event.act }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

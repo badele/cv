@@ -64,6 +64,23 @@ mise run generate-pdf "latex/en" "cv-en.pdf"
 '''
 
 
+
+[tasks.prepare-act-event]
+description = "Prepare act event payload [ci]"
+run = '''
+mkdir -p .github/act
+cat > .github/act/event.json <<'EOF'
+{
+  "act": true
+}
+EOF
+'''
+hide = true
+
 [tasks.run-build-cv]
 description = "Run build-cv workflow locally [ci]"
-run = "act -W .github/workflows/build-cv.yml"
+run = '''
+mise run prepare-act-event
+act -W .github/workflows/build-cv.yml -e .github/act/event.json
+'''
+
