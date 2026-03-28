@@ -68,10 +68,21 @@ jobs:
             cv-fr.html
             cv-en.html
 
-  deploy-gh-pages:
+  pages:
+    name: Publish GitHub Pages
     needs: [build-pdf, convert-html]
     if: ${{ github.ref == 'refs/heads/main' && !github.event.act }}
     runs-on: ubuntu-latest
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -90,14 +101,18 @@ jobs:
           mkdir -p site/latex
           cp index.html site/index.html
           cp latex/*.png site/latex/
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: site
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   release:
-    needs: deploy-gh-pages
+    needs: pages
     if: ${{ github.ref == 'refs/heads/main' && !github.event.act }}
     runs-on: ubuntu-latest
     steps:
