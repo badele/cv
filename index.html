@@ -7,7 +7,7 @@
   <title>Bruno Adele | Senior DevOps / SRE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
@@ -236,6 +236,244 @@
       border-color: var(--accent);
     }
 
+    .cv-card.ansi-card {
+      border-color: rgba(18, 135, 137, 0.35);
+      background: linear-gradient(135deg, #ffffff 0%, #f0fbfb 100%);
+      cursor: pointer;
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: min(360px, 100%);
+    }
+
+    .cv-card.ansi-card:hover {
+      border-color: var(--accent);
+    }
+
+    .ansi-card-top {
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+    }
+
+    .ansi-card-sprite {
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        8px 0 #d34a3a,
+        12px 0 #d34a3a,
+        16px 0 #d34a3a,
+        20px 0 #d34a3a,
+        4px 4px #d34a3a,
+        8px 4px #d34a3a,
+        12px 4px #d34a3a,
+        16px 4px #d34a3a,
+        20px 4px #d34a3a,
+        24px 4px #d34a3a,
+        4px 8px #d34a3a,
+        8px 8px #f2c796,
+        12px 8px #f2c796,
+        16px 8px #f2c796,
+        20px 8px #f2c796,
+        24px 8px #d34a3a,
+        4px 12px #f2c796,
+        8px 12px #f2c796,
+        12px 12px #f2c796,
+        16px 12px #f2c796,
+        20px 12px #f2c796,
+        24px 12px #f2c796,
+        4px 16px #f2c796,
+        8px 16px #2b6cb0,
+        12px 16px #f2c796,
+        16px 16px #2b6cb0,
+        20px 16px #f2c796,
+        8px 20px #f2c796,
+        12px 20px #f2c796,
+        16px 20px #f2c796,
+        20px 20px #f2c796,
+        8px 24px #2b6cb0,
+        12px 24px #2b6cb0,
+        16px 24px #2b6cb0,
+        20px 24px #2b6cb0,
+        4px 28px #2b6cb0,
+        16px 28px #2b6cb0;
+      filter: drop-shadow(0 6px 10px rgba(25, 60, 62, 0.18));
+      transform-origin: center bottom;
+      animation: pixel-hop 1.6s ease-in-out infinite;
+    }
+
+    .ansi-panel {
+      margin-top: 0;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(14px);
+      pointer-events: none;
+      transition: max-height 0.55s ease, opacity 0.3s ease, transform 0.3s ease, margin 0.3s ease;
+    }
+
+    .ansi-panel.is-visible {
+      margin-top: 32px;
+      max-height: 420px;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .ansi-panel-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 18px;
+      padding: 22px 24px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: 0 16px 32px var(--shadow);
+      background-image: linear-gradient(90deg, rgba(18, 135, 137, 0.08) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(18, 135, 137, 0.08) 1px, transparent 1px);
+      background-size: 14px 14px;
+    }
+
+    .pixel-sprite {
+      width: 4px;
+      height: 4px;
+      background: transparent;
+      box-shadow:
+        8px 0 #d34a3a,
+        12px 0 #d34a3a,
+        16px 0 #d34a3a,
+        20px 0 #d34a3a,
+        4px 4px #d34a3a,
+        8px 4px #d34a3a,
+        12px 4px #d34a3a,
+        16px 4px #d34a3a,
+        20px 4px #d34a3a,
+        24px 4px #d34a3a,
+        4px 8px #d34a3a,
+        8px 8px #f2c796,
+        12px 8px #f2c796,
+        16px 8px #f2c796,
+        20px 8px #f2c796,
+        24px 8px #d34a3a,
+        4px 12px #f2c796,
+        8px 12px #f2c796,
+        12px 12px #f2c796,
+        16px 12px #f2c796,
+        20px 12px #f2c796,
+        24px 12px #f2c796,
+        4px 16px #f2c796,
+        8px 16px #2b6cb0,
+        12px 16px #f2c796,
+        16px 16px #2b6cb0,
+        20px 16px #f2c796,
+        8px 20px #f2c796,
+        12px 20px #f2c796,
+        16px 20px #f2c796,
+        20px 20px #f2c796,
+        8px 24px #2b6cb0,
+        12px 24px #2b6cb0,
+        16px 24px #2b6cb0,
+        20px 24px #2b6cb0,
+        4px 28px #2b6cb0,
+        16px 28px #2b6cb0;
+      filter: drop-shadow(0 8px 14px rgba(25, 60, 62, 0.2));
+      transform-origin: center bottom;
+    }
+
+    .ansi-panel.is-visible .pixel-sprite {
+      animation: pixel-hop 1.4s ease-in-out infinite;
+    }
+
+    .ansi-panel-content {
+      text-align: left;
+      display: grid;
+      gap: 12px;
+    }
+
+    .ansi-card-cta {
+      text-decoration: none;
+      color: var(--dark);
+      border: 1px solid var(--line);
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: #ffffff;
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 32px;
+    }
+
+    .cv-card.ansi-card:hover .ansi-card-cta {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .ansi-title {
+      font-family: "Press Start 2P", "Raleway", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+
+    .ansi-text {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+
+    .ansi-command {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .ansi-command code {
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #0f2f31;
+      color: #e6f6f6;
+      border: 1px solid #1f4b4d;
+      font-size: 0.78rem;
+      font-family: "JetBrains Mono", "SFMono-Regular", ui-monospace, "Menlo", monospace;
+    }
+
+    .ansi-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .ansi-link {
+      text-decoration: none;
+      color: var(--dark);
+      border: 1px solid var(--line);
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: #ffffff;
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .ansi-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
     @keyframes fade-up {
       from {
         opacity: 0;
@@ -245,6 +483,35 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @keyframes pixel-hop {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      45% {
+        transform: translateY(-10px);
+      }
+
+      70% {
+        transform: translateY(2px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ansi-panel,
+      .ansi-panel.is-visible,
+      .ansi-panel.is-visible .pixel-sprite,
+      .ansi-card-sprite,
+      .contact,
+      .cv-card,
+      .cv-link,
+      .ansi-link {
+        transition: none;
+        animation: none;
       }
     }
 
@@ -268,6 +535,19 @@
 
       .cv-grid {
         grid-template-columns: minmax(0, 220px);
+      }
+
+      .ansi-panel-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .ansi-panel-content {
+        text-align: center;
+      }
+
+      .ansi-actions {
+        justify-content: center;
       }
     }
   </style>
@@ -318,8 +598,8 @@
             <span>Version francaise</span>
           </div>
           <div class="cv-actions">
-            <a class="cv-link" href="cv-fr.pdf">PDF</a>
-            <a class="cv-link" href="cv-fr.html">HTML</a>
+            <a class="cv-link" href="cv-fr.pdf" target="_blank" rel="noreferrer">PDF</a>
+            <a class="cv-link" href="cv-fr.html" target="_blank" rel="noreferrer">HTML</a>
           </div>
         </div>
         <div class="cv-card">
@@ -329,13 +609,57 @@
             <span>English version</span>
           </div>
           <div class="cv-actions">
-            <a class="cv-link" href="cv-en.pdf">PDF</a>
-            <a class="cv-link" href="cv-en.html">HTML</a>
+            <a class="cv-link" href="cv-en.pdf" target="_blank" rel="noreferrer">PDF</a>
+            <a class="cv-link" href="cv-en.html" target="_blank" rel="noreferrer">HTML</a>
+          </div>
+        </div>
+        <button class="cv-card ansi-card" type="button" id="ansi-card" aria-controls="ansi-panel">
+          <div class="ansi-card-top">
+            <div class="ansi-card-sprite" aria-hidden="true"></div>
+            <strong>ANSI Art</strong>
+            <span>Version retro + Docker</span>
+          </div>
+          <div class="cv-actions">
+            <span class="ansi-card-cta">Voir ANSI Art</span>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <section class="ansi-panel" id="ansi-panel" aria-label="CV ANSI Art">
+      <div class="ansi-panel-inner">
+        <div class="pixel-sprite" aria-hidden="true"></div>
+        <div class="ansi-panel-content">
+          <div class="ansi-title">CV ANSI Art</div>
+          <p class="ansi-text">
+            Un CV retro en mode ANSI art tourne aussi dans Docker. Disponible en version HTML pour un
+            fallback rapide.
+          </p>
+          <div class="ansi-command">
+            <code>docker run -it --cap-drop=ALL --read-only --network none badele/dockercv</code>
+          </div>
+          <div class="ansi-actions">
+            <a class="ansi-link" href="https://badele.github.io/dockercv/" target="_blank" rel="noreferrer">
+              CV HTML ANSI Art
+            </a>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <script>
+    const ansiPanel = document.getElementById("ansi-panel");
+    const ansiCard = document.getElementById("ansi-card");
+
+    if (ansiPanel && ansiCard) {
+      const showPanel = () => {
+        ansiPanel.classList.add("is-visible");
+      };
+
+      ansiCard.addEventListener("click", showPanel);
+    }
+  </script>
 </body>
 
 </html>
