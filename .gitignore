@@ -5,3 +5,4 @@
 justfile.mise
 
 .github/act/event.json
+.cache/
