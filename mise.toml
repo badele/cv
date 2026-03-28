@@ -42,22 +42,38 @@ usage = '''
 arg "<path>" help="latex filename" 
 arg "[output]" help="output pdf path"
 '''
-# dir = "{{usage_path}}"
 run = '''
 output_path="${usage_output}"
-if [ -z "$output_path" ]; then
+if [ -n "$output_path" ]; then
+  output_dir=$(dirname "$output_path")
+  output_name=$(basename "$output_path" .pdf)
+  mkdir -p "$output_dir"
+  pdflatex -output-directory "$output_dir" -jobname "$output_name" "${usage_path}/main.tex"
+else
   pdflatex "${usage_path}/main.tex"
-  exit 0
 fi
-output_dir=$(dirname "$output_path")
-output_name=$(basename "$output_path" .pdf)
-mkdir -p "$output_dir"
-pdflatex -output-directory "$output_dir" -jobname "$output_name" "${usage_path}/main.tex"
 '''
+quiet = true
+
+[tasks.update-github-stars]
+description = "Update GitHub star counts [latex]"
+run = '''
+mise run install-python-deps
+python3 scripts/update-github-stars.py
+'''
+usage = '''
+flag "--force" default=#false
+'''
+quiet = true
+
+[tasks.install-python-deps]
+description = "Install Python dependencies [python]"
+run = "python3 -m pip install -r requirements.txt"
 quiet = true
 
 [tasks.generate-all-pdf]
 description = "Generate all PDF from latex [latex]"
+#depends = ["update-github-stars"]
 run = '''
 mise run generate-pdf "latex/fr" "cv-fr.pdf"
 mise run generate-pdf "latex/en" "cv-en.pdf"
@@ -83,4 +99,3 @@ run = '''
 mise run prepare-act-event
 act -W .github/workflows/build-cv.yml -e .github/act/event.json
 '''
-

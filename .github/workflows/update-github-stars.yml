@@ -1,0 +1,31 @@
+name: update-github-stars
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-stars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install mise
+        uses: jdx/mise-action@v2
+      - name: Update GitHub stars
+        run: mise run update-github-stars
+      - name: Commit updated stars
+        run: |
+          if git diff --quiet -- latex/github.tex; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add latex/github.tex
+          git commit -m "chore: update github stars"
+          git push
