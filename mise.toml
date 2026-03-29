@@ -11,6 +11,7 @@ go = "latest"
 just = "latest"
 "go:github.com/badele/godown" = "latest"
 "go:github.com/badele/justise" = "1.2.0"
+gh = "latest"
 
 ###############################################################################
 # Envs
@@ -37,7 +38,7 @@ run = "justise"
 
 
 [tasks.generate-pdf]
-description = "Generate PDF from latex [latex]"
+description = "Generate PDF from latex [cv]"
 usage = '''
 arg "<path>" help="latex filename" 
 arg "[output]" help="output pdf path"
@@ -56,7 +57,7 @@ fi
 quiet = true
 
 [tasks.update-github-stars]
-description = "Update GitHub star counts [latex]"
+description = "Update GitHub star counts [cv]"
 run = '''
 mise run install-python-deps
 python3 scripts/update-github-stars.py
@@ -66,13 +67,42 @@ flag "--force" default=#false
 '''
 quiet = true
 
+[tasks.update-github-latex-content]
+description = "Update GitHub stars in LaTeX [cv]"
+run = '''
+python3 scripts/update-github-latex-content.py
+'''
+quiet = true
+
+[tasks.update-index-content]
+description = "Update GitHub stars in web page [cv]"
+run = '''
+python3 scripts/update-index-content.py
+'''
+quiet = true
+
+[tasks.update-github-assets]
+description = "Update GitHub stars in cache and assets [cv]"
+run = '''
+mise run update-github-stars
+mise run update-github-latex-content
+mise run update-index-content
+'''
+quiet = true
+
+[tasks.serve-content]
+description = "Serve web pages [cv]"
+run = '''
+python3 -m http.server
+'''
+
 [tasks.install-python-deps]
 description = "Install Python dependencies [python]"
 run = "python3 -m pip install -r requirements.txt"
 quiet = true
 
 [tasks.generate-all-pdf]
-description = "Generate all PDF from latex [latex]"
+description = "Generate all PDF from latex [cv]"
 #depends = ["update-github-stars"]
 run = '''
 mise run generate-pdf "latex/fr" "cv-fr.pdf"

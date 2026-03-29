@@ -7,7 +7,8 @@
   <title>Bruno Adele | Senior DevOps / SRE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Raleway:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
@@ -249,6 +250,46 @@
       border-color: var(--accent);
     }
 
+    .cv-card.github-card {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: min(360px, 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #f3f8f9 100%);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .github-card-top {
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+    }
+
+    .github-card-top i {
+      font-size: 1.6rem;
+      color: #1f2328;
+    }
+
+    .github-stars {
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+    }
+
+    .github-stars-count {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .github-stars-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
     .ansi-card-top {
       display: grid;
       gap: 10px;
@@ -487,6 +528,7 @@
     }
 
     @keyframes pixel-hop {
+
       0%,
       100% {
         transform: translateY(0);
@@ -502,6 +544,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       .ansi-panel,
       .ansi-panel.is-visible,
       .ansi-panel.is-visible .pixel-sprite,
@@ -623,6 +666,17 @@
             <span class="ansi-card-cta">Voir ANSI Art</span>
           </div>
         </button>
+        <a class="cv-card github-card" href="https://github.com/badele" target="_blank" rel="noreferrer"
+          aria-label="GitHub badele">
+          <div class="github-card-top">
+            <i class="fa-brands fa-github" aria-hidden="true"></i>
+            <strong>GitHub</strong>
+            <div class="github-stars">
+              <span class="github-stars-count" id="github-stars-count">975</span>
+              <span class="github-stars-label">Total GitHub stars</span>
+            </div>
+          </div>
+        </a>
       </div>
     </section>
 
