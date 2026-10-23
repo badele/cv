@@ -11,6 +11,8 @@ permissions:
 jobs:
   update-stars:
     runs-on: ubuntu-latest
+    outputs:
+      changes_detected: ${{ steps.commit.outputs.changes_detected }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,9 +21,11 @@ jobs:
       - name: Update GitHub stars
         run: mise run update-github-assets
       - name: Commit updated stars
+        id: commit
         run: |
           if git diff --quiet -- latex/github.tex index.html; then
             echo "No changes to commit."
+            echo "changes_detected=false" >> $GITHUB_OUTPUT
             exit 0
           fi
           git config user.name "github-actions[bot]"
@@ -29,3 +33,13 @@ jobs:
           git add latex/github.tex index.html
           git commit -m "chore: update github stars"
           git push
+          echo "changes_detected=true" >> $GITHUB_OUTPUT
+
+  trigger-build:
+    needs: update-stars
+    if: ${{ needs.update-stars.outputs.changes_detected == 'true' }}
+    uses: ./.github/workflows/build-cv.yml
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
